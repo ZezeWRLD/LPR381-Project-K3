@@ -33,21 +33,50 @@ This project is a menu-driven `.NET` console application developed using Visual 
 
 ## 📂 File Structure
 ```
-LinearProgrammingSolver/
-├── InputOutput/
-│   ├── sample_input.txt
-│   └── output_results.txt
-├── Algorithms/
-│   ├── PrimalSimplex.cs
-│   ├── RevisedSimplex.cs
-│   ├── BranchAndBound.cs
-│   ├── CuttingPlane.cs
-│   └── KnapsackSolver.cs
-├── Sensitivity/
-│   └── AnalysisEngine.cs
-├── Program.cs
-├── SolverMenu.cs
+LinearProgrammingSolver.sln
+│
+├── Solver.Core/                → Model (Algorithms & Domain Logic)
+│   ├── Models/
+│   │   ├── ProblemModel.cs          # Defines LP/IP problem (variables, constraints, RHS, etc.)
+│   │   ├── Constraint.cs            # Constraint representation
+│   │   ├── Variable.cs              # Decision variable representation
+│   │   └── SolutionResult.cs        # Stores optimal solution + iterations
+│   │
+│   ├── Algorithms/
+│   │   ├── PrimalSimplex.cs
+│   │   ├── RevisedSimplex.cs
+│   │   ├── BranchAndBound.cs
+│   │   ├── CuttingPlane.cs
+│   │   └── KnapsackSolver.cs
+│   │
+│   ├── Services/
+│   │   ├── SolverService.cs         # Orchestrates which algorithm to use
+│   │   └── SensitivityAnalysis.cs   # Handles all sensitivity analysis logic
+│   │
+│   └── Utils/
+│       └── FileParser.cs            # Reads input file and outputs results
+│
+├── Solver.ConsoleApp/          → Console "Controller + View"
+│   ├── Program.cs                   # Entry point (solve.exe)
+│   ├── MenuController.cs            # Menu navigation logic
+│   └── ConsoleView.cs               # Text-based output (tableaus, iterations, results)
+│
+├── Solver.BlazorUI/            → Blazor UI (View)
+│   ├── Pages/
+│   │   ├── Index.razor             # Home: upload file / select algorithm
+│   │   ├── Solve.razor             # Displays canonical form, iterations, results
+│   │   ├── Sensitivity.razor       # Sensitivity analysis options
+│   │   └── ErrorHandling.razor     # Infeasible/unbounded cases
+│   │
+│   ├── Components/
+│   │   ├── FileUpload.razor        # Input file uploader
+│   │   ├── ResultTable.razor       # Table for displaying iterations
+│   │   └── ChartView.razor         # Optional: visualize results with charts
+│   │
+│   └── wwwroot/                    # Static assets (CSS, icons, etc.)
+│
 └── README.md
+
 ```
   
 ## 📤 Output File Format
