@@ -8,5 +8,6 @@ namespace LPR381_Project_K3
 {
     internal class ISolver
     {
+
     }
 }
