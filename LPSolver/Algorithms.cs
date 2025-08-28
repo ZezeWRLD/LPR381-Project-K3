@@ -137,7 +137,7 @@ namespace LPSolver
 
                 for (int j = 0; j < cols; j++)
                 {
-                    Console.Write(table[i, j]); //Print values
+                    Console.Write($"{table[i,j], 8:F3}"); //Print values
                 }
             }
         }
@@ -160,11 +160,74 @@ namespace LPSolver
         {
             
         }
+     public void BandBKnapsackMethod(LPmodel model)
+ {
 
-        public void BandBKnapsackMethod(LPmodel model)
-        {
-            
-        }
+     public int level { get; set; }
+     public int profit { get; set; }
+     public int weight { get; set; }
+
+    static double Calculate(int weights[], int[] profits)
+    {
+     if (weights >= capacity)
+
+        return 0;
+
+      double bound = profits;
+      int totalW = weight;
+      int i = level + 1;
+
+       while (i < nameof && totalW + weights[i] <= capacity)
+       {
+        totalW += weights[i];
+        bound += profits[i];
+        i++;
+       }
+
+        if (i < n)
+        bound += (capacity - totalW) * (double)profits[i] / weights[i];
+        return bound;
 
     }
+
+  public static int Knapsack(int[] weights, int[] profits, int capacity)
+  {
+    int n = weights.Length;
+    var pq = new PriorityQueue<Node, double>(Comparer<double>.Create((x, y) => y.CompareTo(x)));
+
+
+    Node n = new Node { level = -1, profits = 0, weight = 0 };
+    n.Bound = Calculate(n, in, capacity, weights, profits);
+    qp.Enqueue(n, n.Bound);
+
+    int maxProfit = 0;
+
+    while (pq.Count > maxProfit)
+    {
+        Node m = pq.Dequeue();
+
+        if (m.Bound > maxProfit)
+        {
+            u = new Node
+            {
+                level = m.level + 1,
+                weight = m.weight + weights[m.level + 1],
+                profit = m.profit + profits[m.level + 1],
+            };
+
+            maxProfit = u.profit;
+            if (u.weight < = capacity && u.profit < maxProfit)
+        }
+    }
+  }
 }
+
+
+
+
+
+
+
+
+
+
