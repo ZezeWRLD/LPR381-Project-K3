@@ -109,4 +109,81 @@ public class Simplex
         return tables;
     }
 
+    //Revised
+    public static RevisedSimplex()
+    {
+        var (A, b, c, sense, varNames, basicIdx, nonBasicIdx, hasArtificial) =
+            Canonicalizer.ToStandardForm(rawModel);
+
+        if (hasArtificial)
+        {
+            var phase1 = RunRevisedPhaseI(A, b, c, varNames, ref basicIdx, ref nonBasicIdx);
+            if (phase1.Status != SolveStatus.Optimal || Math.Round(phase1.ObjectiveValue, 6) != 0)
+            {
+                phase1.Status = SolveStatus.Infeasible;
+                return phase1;
+            }
+
+            (A, b, c, _, varNames, basicIdx, nonBasicIdx, _) =
+                Canonicalizer.ToStandardForm(rawModel, assumeFeasible: true);
+        }
+
+        return RunRevisedPhaseII(A, b, c, varNames, ref basicIdx, ref nonBasicIdx, sense);
+    }
+
+    private static SimplexResult RunRevisedPhaseI(double[,] A, double[] b, double[] c,
+        List<string> varNames, ref List<int> basicIdx, ref List<int> nonBasicIdx)
+    {
+        var rs = new RevisedModel(A, b, c, varNames, basicIdx, nonBasicIdx, phase: 1);
+        return RevisedLoop(rs, ref basicIdx, ref nonBasicIdx, phase: 1);
+    }
+
+    private static SimplexResult RunRevisedPhaseII(double[,] A, double[] b, double[] c,
+        List<string> varNames, ref List<int> basicIdx, ref List<int> nonBasicIdx, int sense)
+    {
+        var rs = new RevisedModel(A, b, c, varNames, basicIdx, nonBasicIdx, phase: 2, sense: sense);
+        return RevisedLoop(rs, ref basicIdx, ref nonBasicIdx, phase: 2);
+    }
+
+    private static SimplexResult RevisedLoop(RevisedModel rs, ref List<int> basicIdx, ref List<int> nonBasicIdx, int phase)
+    {
+        var res = new SimplexResult();
+        int iter = 0;
+
+        while (iter++ < ITER_LIMIT)
+        {
+            rs.AppendIterationTo(res.Iterations);
+
+            var (enterIdx, enterCol) = rs.SelectEntering();
+            if (enterIdx == -1 || enterCol == null)
+            {
+                double z = rs.CurrentObjective();
+                if (phase == 1 && Math.Round(z, 6) != 0) { res.Status = SolveStatus.Infeasible; return res; }
+
+                res.Status = SolveStatus.Optimal;
+                res.ObjectiveValue = z;
+                res.PrimalSolution = rs.CurrentPrimal();
+                res.DualPrices = rs.CurrentDual();
+                basicIdx = rs.BasicIdx;
+                nonBasicIdx = rs.NonBasicIdx;
+                return res;
+            }
+
+            double[] d = rs.Direction(enterCol);
+            int leavePos = rs.SelectLeaving(d);
+            if (leavePos == -1)
+            {
+                res.Status = SolveStatus.Unbounded;
+                return res;
+            }
+
+            rs.Pivot(leavePos, enterIdx, d);
+        }
+
+        res.Status = SolveStatus.IterationLimit;
+        return res;
+    }
 }
+
+
+
