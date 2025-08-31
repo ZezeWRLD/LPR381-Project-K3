@@ -13,11 +13,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\admin\\Desktop\\NewKnapsackPro\\NewKnapsackPro.csproj",
       "projectName": "NewKnapsackPro",
       "projectPath": "C:\\Users\\admin\\Desktop\\NewKnapsackPro\\NewKnapsackPro.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\admin\\Desktop\\NewKnapsackPro\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\admin\\Desktop\\KnapsackProject\\KnapsackProject.csproj",
+      "projectName": "KnapsackProject",
+      "projectPath": "C:\\Users\\admin\\Desktop\\KnapsackProject\\KnapsackProject.csproj",
+      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\admin\\Desktop\\KnapsackProject\\obj\\",
+>>>>>>> b61a9a27c05cbb9d4cb47005ae1117a9ec367f31
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"

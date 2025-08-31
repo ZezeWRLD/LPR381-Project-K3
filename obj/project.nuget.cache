@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "nQeGQsPSwv0=",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\Desktop\\NewKnapsackPro\\NewKnapsackPro.csproj",
+=======
+  "dgSpecHash": "gTeANkJKt6I=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\admin\\Desktop\\KnapsackProject\\KnapsackProject.csproj",
+>>>>>>> b61a9a27c05cbb9d4cb47005ae1117a9ec367f31
   "expectedPackageFiles": [],
   "logs": []
 }

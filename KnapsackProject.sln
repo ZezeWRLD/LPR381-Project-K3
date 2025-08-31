@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-=======
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
@@ -181,7 +177,7 @@ class Program
             writer.WriteLine($"Items Taken: {string.Join(" ", bestSet)}");
         }
 
-        Console.WriteLine("✅ Base Knapsack Solved. Results saved to file.");
+        Console.WriteLine("Base Knapsack Solved. Results saved to file.");
         
         // --- Sensitivity Analysis Demo ---
         Console.WriteLine("\n--- Sensitivity Analysis ---");
@@ -207,4 +203,3 @@ class Program
         Console.WriteLine($"If new item (v=7,w=9) is added → New Best Profit = {profit4}");
     }
 }
->>>>>>> b61a9a27c05cbb9d4cb47005ae1117a9ec367f31
