@@ -1,0 +1,4 @@
+C:\Users\admin\Desktop\NewKnapsackPro\obj\Debug\net9.0\NewKnapsackPro.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\Desktop\NewKnapsackPro\obj\Debug\net9.0\NewKnapsackPro.AssemblyInfoInputs.cache
+C:\Users\admin\Desktop\NewKnapsackPro\obj\Debug\net9.0\NewKnapsackPro.AssemblyInfo.cs
+C:\Users\admin\Desktop\NewKnapsackPro\obj\Debug\net9.0\NewKnapsackPro.csproj.CoreCompileInputs.cache
